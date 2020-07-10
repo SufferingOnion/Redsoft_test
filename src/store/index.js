@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import 'whatwg-fetch'
 
 Vue.use(Vuex)
 
@@ -44,7 +45,7 @@ export default new Vuex.Store({
   },
   actions: {
     BuyPicture: (context, payload) => {
-      fetch("https://reqres.in/api/products/3", {
+      window.fetch("https://reqres.in/api/products/3", {
         method: 'GET',
         cache: "no-store",
       })
@@ -56,7 +57,7 @@ export default new Vuex.Store({
         })
     },
     GetPictures: (context) => {
-      fetch("/Redsoft_test/pictures.json", {
+      window.fetch("/Redsoft_test/pictures.json", {
         method: 'GET',
       })
         .then(response => response.json())
