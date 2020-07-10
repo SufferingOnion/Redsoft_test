@@ -128,6 +128,8 @@ export default {
             }
           }
           &__loader {
+            top: 0;
+            left: 0;
             background-color: transparent;
             position: relative;
             display: flex;
