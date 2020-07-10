@@ -137,6 +137,7 @@ export default {
             align-items: center;
             img {
               position: absolute;
+              top: 0;
               &:first-child {
                 animation: Loader 1s ease infinite;
               }
