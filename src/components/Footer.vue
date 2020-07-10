@@ -30,6 +30,9 @@ export default {
 /deep/ * {
   color: #555555;
 }
+/deep/ .menu__logo>img{
+  background-color: #403432;
+}
 .footer {
   width: 100%;
   background: #eceaea;

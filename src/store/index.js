@@ -3,48 +3,39 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const SyncState = (store) => {
+  if (sessionStorage.getItem("pictures") == null) {
+    store.dispatch("GetPictures")
+  } else {
+    console.log(JSON.parse(sessionStorage.getItem("pictures")))
+    store.commit("GET_PICTURES", JSON.parse(sessionStorage.getItem("pictures")))
+  }
+  store.subscribe(mutation => {
+    if (mutation.type === 'PURCHASE') {
+      sessionStorage.setItem("pictures", JSON.stringify(store.state.pictures));
+    }
+    if (mutation.type === 'GET_PICTURES') {
+      sessionStorage.setItem("pictures", JSON.stringify(store.state.pictures));
+
+    }
+  });
+}
+
+
 export default new Vuex.Store({
   state: {
-    pictures: [
-      {
-        name: "«Рождение Венеры»",
-        url: "/Redsoft_test/img/Venera's_burth.png",
-        author: "Сандро Боттичелли",
-        last_cost: "2 000 000 $",
-        cost: "1 000 000 $",
-        sold: false,
-        purchased: false,
-      },
-      {
-        name: "«Тайная вечеря»",
-        url: "/Redsoft_test/img/Last_supper.png",
-        author: "Леонардо да Винчи",
-        last_cost: "0",
-        cost: "3 000 000 $",
-        sold: false,
-        purchased: false,
-      },
-      {
-        name: "«Сотворение Адама»",
-        url: "/Redsoft_test/img/Adam's _creations.png",
-        author: "Микеланджело",
-        last_cost: "6 000 000 $",
-        cost: "5 000 000 $",
-        sold: false,
-        purchased: false,
-      },
-      {
-        name: "«Урок анатомии»",
-        url: "/Redsoft_test/img/Anatomy_lesson.png",
-        author: "Рембрандт",
-        last_cost: "0",
-        cost: "0",
-        sold: true,
-        purchased: false,
-      }
-    ]
+    pictures: [],
   },
   mutations: {
+    PURCHASE: (state, payload) => {
+      state.pictures[payload.id - 1].purchased = payload.status
+
+    },
+    GET_PICTURES: (state, payload) => {
+      payload.forEach(pic => {
+        state.pictures.push(pic)
+      });
+    }
   },
   getters: {
     get_pictures: (state) => {
@@ -52,8 +43,28 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    
+    BuyPicture: (context, payload) => {
+      fetch("https://reqres.in/api/products/3", {
+        method: 'GET',
+        cache: "no-store",
+      })
+        .then(response => {
+          context.commit("PURCHASE", {
+            status: response.ok,
+            id: payload.id,
+          })
+        })
+    },
+    GetPictures: (context) => {
+      fetch("/Redsoft_test/pictures.json", {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(response => {
+          context.commit("GET_PICTURES", response)
+        })
+    }
   },
-  modules: {
-  }
+  plugins: [SyncState]
 })
+

@@ -24,6 +24,9 @@ export default {
 /deep/ * {
   color: #343030;
 }
+/deep/ .menu__logo>img{
+  background-color: #776763;
+}
 .header {
   width: 100%;
   border-bottom: 1px solid #e1e1e1;
@@ -51,15 +54,17 @@ export default {
       align-items: stretch;
       &__field {
         font: normal 1em "Merriweather";
-        padding: 0;
         font-size: inherit;
+        color: #343030;
         flex-grow: 1;
-        border: #e1e1e1 1px;
+        padding: 0;
         padding-top: 13px;
         padding-bottom: 14px;
         padding-left: 16px;
+        background-color: transparent;
+        border: #e1e1e1 1px;
         border-style: solid none solid solid;
-        color: #343030;
+
         &:focus {
           outline: none;
           border: #b5b5b5 1px;

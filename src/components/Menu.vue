@@ -1,6 +1,6 @@
 <template>
   <nav class="menu">
-    <a href="#"><img src="../assets/icons/logo-museum.png" alt="museum's logo" /></a>
+    <a class="menu__logo" href="#"><img src="../assets/icons/logo-museum.png" alt="museum's logo" /></a>
     <a href="#">Каталог</a>
     <a href="#">Доставка</a>
     <a href="#">Оплата</a>

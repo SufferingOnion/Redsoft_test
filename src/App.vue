@@ -6,9 +6,9 @@
       <div class="wrapper__pictures-list pictures-list">
         <PictureCard
           class="pictures-list__card"
-          v-for="(picture, index) in pictures"
-          :key="index"
+          v-for="picture in pictures"
           :picture="picture"
+          :key="picture.name"
         />
       </div>
     </div>
@@ -57,6 +57,7 @@ html {
 }
 
 .button {
+  user-select: none;
   background: #403432;
   color: #F4F6F9;
   cursor: pointer;
