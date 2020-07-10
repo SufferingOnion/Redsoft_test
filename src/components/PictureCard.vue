@@ -187,17 +187,18 @@ export default {
 .button-enter-active,
 .button-leave-active {
   position: absolute;
+  top:0;
   transition: all 0.2s ease-in-out;
 }
 .button-enter {
+  left: 0;
   transform: translateX(-100%);
   opacity: 0;
 }
 .button-leave-to {
+  left: 0;
   transform: translateX(100%);
   opacity: 0;
-}
-.button {
 }
 @keyframes Loader {
   from {
