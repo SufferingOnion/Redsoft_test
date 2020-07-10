@@ -133,6 +133,8 @@ export default {
             background-color: transparent;
             position: relative;
             display: flex;
+            width:100%;
+            height: 50%;
             justify-content: center;
             align-items: center;
             img {
